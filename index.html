@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    * {
+        
+    }
+    h1{
+        color: rgb(1, 1, 78);
+        text-align: center;
+        border-bottom: 4px solid purple;
+    }
+    .infrom{
+        width:auto;
+        height:425px ;
+        border: 0.5px solid gainsboro;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius:20px ;
+    }
+    .h2{
+        color: green;
+        margin-top: 0;
+        height: 50px;
+        padding-top: 10px;
+        background-color:rgb(188, 235, 188) ;
+        border-bottom: 0.5px solid gainsboro;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+    .body{
+        padding: 20px;
+    }
+    .grid{
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+        gap: 20px;
+    }
+    .group{
+        display: flex;
+        flex-direction: column;
+    }
+    .group.full {
+        grid-column: span 2;
+    }
+    label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #2d2f33;
+    }
+    label .required {
+        color: red;
+        margin-left: 2px;
+    }
+    input, select, textarea {
+        padding: 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+        outline: none;
+    }
+    input:focus, select:focus, textarea:focus{
+        border-color: #6b46ff;
+    }
+    .btn-DF{
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    .btn{
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+    }
+    .btn-submit{
+        background-color: green;
+        color: #0c2d5f;
+    }
+    .btn-reset{
+        background-color: red;
+        color: #d1d5db;
+    }
+    .table{
+        width:auto;
+        height:500px ;
+        margin-top: 10px;
+        border: 0.5px solid gainsboro;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius:20px ;
+    }
+    .h1{
+        color:  rgb(4, 19, 151);
+        margin-top: 0;
+        height: 50px;
+        padding-top: 10px;
+        background-color:rgb(192, 219, 245) ;
+        border-bottom: 0.5px solid gainsboro;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+    .text{
+        margin-top: 10px;
+        margin-left: 1200px;
+        margin-bottom: 10px;
+    }
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    .table-controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-size: 14px;
+    }
+    .table-controls select, .table-controls input {
+        padding: 6px 10px;
+    }
+    table {
+        width: 97.5%;
+        margin-left: 20px;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+    thead {
+        background: #e0e7ff;
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #e5e7eb;
+    }
+    th {
+        font-weight: 600;
+        color: #1e3a8a;
+    }
+    tbody tr:hover {
+        background: #f9fafb;
+    }
+
+    .action-btn {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        color: #faf5f5;
+        cursor: pointer;
+        font-size: 12px;
+        margin-right: 5px;
+    }
+    .btn-edit {
+        background: #2563eb;
+    }
+    .btn-delete {
+        background: #dc2626;
+    }
+    .pages{
+        margin-left: 1250px;
+    }
+    .pagination{
+        margin-left: 10px;
+        margin-top: 20px;
+    }
+    .pages button {
+        padding: 6px 12px ;
+        border: 1px solid #d2d8df;
+        background: #fff;
+        cursor: pointer;
+        border-radius: 4px;
+        margin-left: 5px;
+    }
+    .pages button.active {
+        background: #2563eb;
+        color: #fff;
+        border-color: rgba(35, 104, 128, 0.2);
+        margin-left: 100px;
+    }
+    @media(max-width: 992px) {
+        .form-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .form-group.full {
+            grid-column: span 2;
+        }
+    }
+    @media(max-width: 600px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+        .form-group.full {
+            grid-column: span 1;
+        }
+        table {
+            display: block;
+            overflow-x: auto;
+        }
+    }
+</style>
+<body>
+    <h1><i class="fa-solid fa-graduation-cap" style="color: rgb(6, 31, 117);"></i> Student Management System</h1>
+
+    <div class="infrom">
+    <div class="h2"><h2><i class="fa-solid fa-user-group" style="color: rgb(60, 106, 91);"></i>Student Registration From</h2></div>
+    <div class="body">
+    <form >
+    <div class="grid">
+        <div class="group">
+            <label>Full Name<span class="required">*</span></label>
+            <input type="text" placeholder="Enter full name">
+        </div>
+        <div class="group">
+            <label>Roll number <span class="required">*</span></label>
+            <input type="text" placeholder="Enter roll number">
+        </div>
+        <div class="group">
+            <label>Email<span class="required">*</span></label>
+            <input type="text" placeholder="Enter email address">
+        </div>
+        <div class="group">
+            <label>Date of Birth<span class="required">*</span></label>
+            <input type="date">
+        </div>
+        <div class="group">
+            <label>Gender <span class="required">*</span></label>
+            <div class="Gender">
+                <label><input type="radio" name="gemder"checked> Male</label>
+                <label><input type="radio" name="gemder"checked> female</label>
+                <label><input type="radio" name="gemder"checked> other</label>
+        </div></div>
+        <div class="group">
+            <label>Course <span class="required">*</span></label>
+            <select>
+                <option>Select Course</option>
+                <option>BCA</option>
+                <option>BCA</option>
+                <option>B.Sc. IT</option>
+                <option>B.com</option>
+            </select>
+        </div>
+        <div class="group">
+            <label>Year <span class="required">*</span></label>
+            <select>
+                <option>Select Year</option>
+                <option>1rd Year</option>
+                <option>2rd Year</option>
+                <option>3rd Year</option>
+            </select>
+        </div>
+        <div class="group">
+            <label>Phone Number <span class="required">*</span></label>
+            <input type="text" placeholder="Enter phone number">
+        </div>
+        <div class="group full">
+            <label>Address<span class="required">*</span></label>
+            <textarea rows="2" placeholder="Enter full address"></textarea>
+        </div>
+        <div class="group">
+            <label>Select city<span class="required">*</span></label>
+            <select>
+                <option>Select City</option>
+                <option>P</option>
+                <option>Kolahapur</option>
+                <option>Nagpur</option>
+            </select>
+        </div>
+        <div class="group">
+            <label>Pin Code <span class="required">*</span></label>
+            <input type="text" placeholder="Enter pin code">
+        </div>
+    </div>
+    </div></form>
+    <div class="btn-DF">
+            <button type="submit"class=" btn btn-submit"><i class="fa-solid fa-closed-captioning" style="color: rgb(221, 226, 224);"></i>Submit</button>
+            <button type="reset"class=" btn btn-reset"><i class="fa-solid fa-arrows-rotate" style="color: rgb(221, 226, 224);"></i>Reset</button>
+        </div>
+    </div>
+
+    <div class="table">
+        <div class="h1">
+            <h2><i class="fa-solid fa-users" style="color: rgb(4, 19, 151);"></i>Registered Students</h2>
+        </div>
+        <div class="text">
+            <label>Search:</label><input type="text" placeholder="Search Students">
+        </div>
+     <div class="tables">
+         <table>
+             <tbody>
+                <thead>
+                    <tr>
+                        <th>#</th><th>Roll No.</th><th>Name</th><th>Email</th>
+                        <th>Course</th><th>Year</th><th>City</th><th>Phone</th><th>Actions</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>1</td><td>101</td><td>Rahul Sharma</td><td>rahul@gmail.com</td><td>BCA</td><td>1st Year</td>
+                    <td>Delhi</td><td>1236152346</td>
+                    <td><button class="action-btn btn-edit"><i class="fa-solid fa-pen"></i>Edit</button><button class="action-btn btn-delete"><i>🗑 Delete</i></button></td>
+                </tr>
+                <tr>
+                    <td>2</td><td>102</td><td>Priya Varma</td><td>priya@gmail.com</td><td>B.Sc.IT</td><td>2nd Year</td>
+                    <td>Mumbai</td><td>1123456346</td>
+                    <td><button class="action-btn btn-edit"><i class="fa-solid fa-pen"></i>Edit</button><button class="action-btn btn-delete"><i>🗑 Delete</i></button></td>
+                </tr>
+                <tr>
+                    <td>3</td><td>103</td><td>Amit Kumar</td><td>amit@gmail.com</td><td>B.Com</td><td>1st Year</td>
+                    <td>Delhi</td><td>778945346</td>
+                    <td><button class="action-btn btn-edit"><i class="fa-solid fa-pen"></i>Edit</button><button class="action-btn btn-delete"><i>🗑 Delete</i></button></td>
+                </tr>
+                <tr>
+                    <td>4</td><td>104</td><td>Neha Singh</td><td>neha@gmail.com</td><td>BCA</td><td>3rd Year</td>
+                    <td>Delhi</td><td>1223544555</td>
+                    <td><button class="action-btn btn-edit"><i class="fa-solid fa-pen"></i>Edit</button><button class="action-btn btn-delete"><i>🗑 Delete</i></button></td>
+                </tr>
+                <tr>
+                    <td>5</td><td>105</td><td>Vikram Patil</td><td>vikram@gmail.com</td><td>B.Sc.IT</td><td>2nd Year</td>
+                    <td>Delhi</td><td>1236152346</td>
+                    <td><button class="action-btn btn-edit"><i class="fa-solid fa-pen"></i>Edit</button><button class="action-btn btn-delete"><i>🗑 Delete</i></button></td>
+                </tr>
+             </tbody>
+        </table>
+        <div class="pagination">
+            <span> showin 1 to 5 of 5 enteries</span>
+        </div>
+         <div class="pages">
+                <button>Previous</button>
+                <button class="activee">1</button>
+                <button>Next</button>
+        </div>
+      
+    </div>
+</body>
+</html>
